@@ -1,0 +1,140 @@
+<html>
+
+<head>
+    <title>Blue</title>
+    <style>
+        body {
+            font-family: Helvetica;
+        }
+
+        #form {
+            margin-top: 50px;
+        }
+
+        #save {
+            right: 10px;
+            position: absolute;
+        }
+
+        #path {
+            position: absolute;
+            margin-top: 10px;
+            padding: 5px;
+            color: #34495e;
+            border: 2px solid lightgray;
+        }
+
+        #packages {
+            margin:8px;
+            margin-left: 0;
+            border: 2px solid #2980b9;
+            
+            position: absolute;
+        }
+
+        .li-package {
+            min-width: 150px;
+            margin: 10px;
+            float: left;
+            list-style: none;
+        }
+    </style>
+    <script src="http://code.jquery.com/jquery-3.2.1.min.js"></script>
+</head>
+
+<body>
+    <button onclick="selectFolder()" id="select">Select Folder</button>
+    <button onclick="createProject(event)" id="create" disabled>Create Project</button>
+    <button onclick="saveSettings()" id="save" disabled>Save Settings</button>
+
+
+    <div id="path">No Path selected</div>
+
+    <div id="form">
+        <table>
+            <tr>
+                <td>
+                    Name :
+                </td>
+                <td>
+                    <input id="name" placeholder="App name" value="myapp" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Version :
+                </td>
+                <td>
+                    <input id="version" placeholder="1.0.0" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Description :
+                </td>
+                <td>
+                    <input id="description" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Entry point :
+                </td>
+                <td>
+                    <input id="entry point" placeholder="index.js" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Test command :
+                </td>
+                <td>
+                    <input id="test command" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Git repository :
+                </td>
+                <td>
+                    <input id="git repository" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Keywords :
+                </td>
+                <td>
+                    <input id="keywords" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Author :
+                </td>
+                <td>
+                    <input id="author" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    license :
+                </td>
+                <td>
+                    <input id="license" placeholder="ISC" />
+                </td>
+            </tr>
+
+
+
+        </table>
+        <p style="margin-top:30px">Select Packages if you want</p>
+        <div id="packages">
+
+        </div>
+
+    </div>
+    <script src="main.js"></script>
+</body>
+
+</html>
