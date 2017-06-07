@@ -12,7 +12,8 @@
     "electron": "^1.6.8"
   },
   "dependencies": {
-    "electron": "^1.6.8"
+    "electron": "^1.6.8",
+    "jquery":"^3.2.1"
   },
   "description": ""
 }
