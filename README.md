@@ -2,7 +2,7 @@
 A basic desktop application for setting up a new empty project with ease for node.js developers.
 Currently only tested in **Windows**
 
-##nstalling and Running
+## Installing and Running
 You know what to do if you are a node.js developer
 
 Enter these commands.
