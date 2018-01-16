@@ -10,11 +10,15 @@
         #form {
             margin-top: 50px;
         }
-
-        #save {
-            right: 10px;
-            position: absolute;
+        /* #save {
+            
+           
         }
+
+        #console{
+            
+          
+        } */
 
         #path {
             position: absolute;
@@ -24,12 +28,29 @@
             border: 2px solid lightgray;
         }
 
+        #search {
+            padding: 20px;
+            position: absolute;
+            top: 30px;
+            right: 0;
+        }
+
+        #search_inp{
+            padding: 6px;
+        }
+
         #packages {
-            margin:8px;
+            margin: 8px;
             margin-left: 0;
             border: 2px solid #2980b9;
-            
+
             position: absolute;
+        }
+
+        #search_list {
+            background: #F1F0F0;
+            padding: 0px;
+            margin-top: 10px;
         }
 
         .li-package {
@@ -38,103 +59,155 @@
             float: left;
             list-style: none;
         }
+
+        .package_item {
+            list-style: none;
+        }
+
+        .package_item:hover {}
+
+        .btn {
+            /* background-image: -webkit-gradient(linear,left top,left bottom,from(#f5f5f5),to(#f1f1f1));
+                background-image: -webkit-linear-gradient(top,#f5f5f5,#f1f1f1); */
+            -webkit-border-radius: 2px;
+            -webkit-user-select: none;
+            background-color: #f2f2f2;
+            border: 1px solid #f2f2f2;
+            border-radius: 2px;
+            color: #757575;
+            cursor: pointer;
+            font-family: arial, sans-serif;
+            font-size: 13px;
+            font-weight: bold;
+            min-width: 54px;
+            padding: 8px;
+        }
+
+        .btn:hover {
+            background-image: -webkit-gradient(linear, left top, left bottom, from(#f8f8f8), to(#f1f1f1));
+            background-image: -webkit-linear-gradient(top, #f8f8f8, #f1f1f1);
+            -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+            background-color: #f8f8f8;
+            background-image: linear-gradient(top, #f8f8f8, #f1f1f1);
+            background-image: -o-linear-gradient(top, #f8f8f8, #f1f1f1);
+            border: 1px solid #c6c6c6;
+            box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+            color: #222;
+        }
+
+        .btn:disabled {
+            color: #b5b3b3;
+        }
+
+        .btn:disabled:hover {
+            background: #f2f2f2;
+            -webkit-box-shadow:none;
+            border-color: transparent;
+        }
     </style>
-    <script src="http://code.jquery.com/jquery-3.2.1.min.js"></script>
+
 </head>
+<script src="http://code.jquery.com/jquery-3.2.1.min.js"></script>
 
-<body>
-    <button onclick="selectFolder()" id="select">Select Folder</button>
-    <button onclick="createProject(event)" id="create" disabled>Create Project</button>
-    <button onclick="saveSettings()" id="save" disabled>Save Settings</button>
-
-
-    <div id="path">No Path selected</div>
-
-    <div id="form">
-        <table>
-            <tr>
-                <td>
-                    Name :
-                </td>
-                <td>
-                    <input id="name" placeholder="App name" value="myapp" />
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    Version :
-                </td>
-                <td>
-                    <input id="version" placeholder="1.0.0" />
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    Description :
-                </td>
-                <td>
-                    <input id="description" />
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    Entry point :
-                </td>
-                <td>
-                    <input id="entry point" placeholder="index.js" />
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    Test command :
-                </td>
-                <td>
-                    <input id="test command" />
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    Git repository :
-                </td>
-                <td>
-                    <input id="git repository" />
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    Keywords :
-                </td>
-                <td>
-                    <input id="keywords" />
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    Author :
-                </td>
-                <td>
-                    <input id="author" />
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    license :
-                </td>
-                <td>
-                    <input id="license" placeholder="ISC" />
-                </td>
-            </tr>
+    <body>
+        <button onclick="selectFolder()" id="select" class="btn">Select Folder</button>
+        <button onclick="createProject(event)" id="create" class="btn" disabled>Create Project</button>
+        <button onclick="saveSettings()" id="save" class="btn" disabled>Save Settings</button>
+        <button onclick="toggleConsole()" id="console" class="btn">Toggle Console</button>
 
 
+        <div id="path">No Path selected</div>
 
-        </table>
-        <p style="margin-top:30px">Select Packages if you want</p>
-        <div id="packages">
+        <div id="form">
+            <table>
+                <tr>
+                    <td>
+                        Name :
+                    </td>
+                    <td>
+                        <input id="package name" placeholder="App name" value="myapp" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Version :
+                    </td>
+                    <td>
+                        <input id="version" placeholder="1.0.0" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Description :
+                    </td>
+                    <td>
+                        <input id="description" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Entry point :
+                    </td>
+                    <td>
+                        <input id="entry point" placeholder="index.js" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Test command :
+                    </td>
+                    <td>
+                        <input id="test command" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Git repository :
+                    </td>
+                    <td>
+                        <input id="git repository" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Keywords :
+                    </td>
+                    <td>
+                        <input id="keywords" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Author :
+                    </td>
+                    <td>
+                        <input id="author" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        license :
+                    </td>
+                    <td>
+                        <input id="license" placeholder="ISC" />
+                    </td>
+                </tr>
+
+
+
+            </table>
+            <!-- <p style="margin-top:30px">Select Packages if you want</p> -->
+            <div id='search'>
+                <input id="search_inp" type='text' onkeydown="inputEnter(event)" />
+                <button id='search_btn' class="btn" onclick="search()">Search</button>
+                <div id='search_list'></div>
+            </div>
+            <div id="packages">
+
+            </div>
 
         </div>
-
-    </div>
-    <script src="main.js"></script>
-</body>
+        <script src="main.js"></script>
+    </body>
 
 </html>

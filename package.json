@@ -1,5 +1,5 @@
 {
-  "name": "blue",
+  "name": "NodeJs_Easy_Setup",
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
@@ -9,12 +9,9 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "electron": "^1.6.8",
-    "jquery":"^3.2.1"
+    "electron": "^1.7.10",
+    "jquery": "^3.2.1"
   },
-  "dependencies": {
-    "electron": "^1.6.8",
-    "jquery":"^3.2.1"
-  },
+  "dependencies": {},
   "description": ""
 }

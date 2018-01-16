@@ -12,7 +12,7 @@ var
 //console.log(dialog.showOpenDialog({properties: ['openDirectory', 'multiSelections']})[0]);
 
 var contents = {
-  "name": "myapp",
+  "package name": "myapp",
   "version": "",
   "description": "",
   "entry point": "",
@@ -31,7 +31,7 @@ var packages = {
   "Csv": "npm install csv",
   "Debug": "npm install debug",
   "Express": "npm install express",
-  "Electron": "npm install electron",
+  "Electron": "npm install --verbose electron",
   "Forever": "npm install -g forever",
   "Grunt": "npm install grunt",
   "Gulp": "npm install gulp",
@@ -70,11 +70,11 @@ var install_packages = {};
 
 
 $(document).ready(function () {
-  for (var key in packages)
-    $("#packages").append("<li class='li-package' ><input name='" + key + "' type='checkbox' >" + key + "</input></li>");
-  $('#packages input').on("click", function () {
-    saveBtn.disabled = false;
-  });
+  // for (var key in packages)
+  //   $("#packages").append("<li class='li-package' ><input name='" + key + "' type='checkbox' >" + key + "</input></li>");
+  // $('#packages input').on("click", function () {
+  //   saveBtn.disabled = false;
+  // });
 
 });
 
@@ -82,6 +82,14 @@ $(document).ready(function () {
 $("#form input").on("keydown", function () {
   saveBtn.disabled = false;
 });
+
+
+
+$('#packages input').on("click", function () {
+  saveBtn.disabled = false;
+});
+
+$("#packages").text("No packages were selected.Search for packages.");
 
 
 function saveSettings() {
@@ -96,6 +104,10 @@ function saveSettings() {
   });
 
   saveBtn.disabled = true;
+}
+
+function toggleConsole() {
+  require('electron').remote.getCurrentWindow().webContents.toggleDevTools();
 }
 
 function selectFolder() {
@@ -164,24 +176,56 @@ function npm_init() {
 
 }
 
+function inputEnter(e){
+  if(e.keyCode == 13){
+    $("#search_btn").click();
+  }
+}
+
+function search() {
+  // $.get("https://ac.cnstrc.com/autocomplete/"+$("#search_inp").val()+"?autocomplete_key=CD06z4gVeqSXRiDL2ZNK",function(data){
+  //   console.log(data);
+  // })
+  $("#search_btn")[0].disabled = true;
+  $("#search_btn").text('Searching...');
+  $("#search_list").html("");
+  $.get("https://www.npmjs.com/search?q=" + $("#search_inp").val(), function (data) {
+    // search finished
+    $("#search_btn").text('Search');
+    $("#search_btn")[0].disabled = false;
+    var list = $(data).find('.packageName');
+    list.each(function (index) {
+      $("#search_list").append("<li class='package_item btn' >" + $(this).text() + "</li>");
+    })
+    $(".package_item").click(function () {
+      if($("#packages").text()=="No packages were selected.Search for packages."){
+        $("#packages").text("")
+        $("#packages").append("<li class='li-package' ><input name='" + $(this).text() + "' type='checkbox' >" + $(this).text() + "</input></li>");
+      }else{
+      $("#packages").append("<li class='li-package' ><input name='" + $(this).text() + "' type='checkbox' >" + $(this).text() + "</input></li>");
+      }
+    });
+  })
+
+}
+
 function installPackages() {
   createBtn.disabled = true;
   for (var key in install_packages) {
-    var pack = exec(install_packages[key], { cwd: path }, function (err, stdout, stderr) {
+    var pack = exec("npm install " + key, { cwd: path }, function (err, stdout, stderr) {
       console.log(stdout);
     });
-
   }
-
-
-
 }
 
 function createFiles() {
   var comd = "echo.>" + contents["entry point"];
   exec(comd, { cwd: path }, function (err, stdout, stderr) {
-
+    comd = "echo.>index.html";
+    exec(comd, { cwd: path }, function (err, stdout, stderr) {
+    })
   })
+ 
 }
 
 
