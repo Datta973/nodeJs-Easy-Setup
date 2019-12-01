@@ -1,9 +1,9 @@
 # nodeJs-Easy-Setup
-A basic desktop application for setting up a new empty project with ease for node.js developers.
+A GUI tool for setting up a nodeJs project.
 Currently only tested in **Windows**
 
 ## Installing and Running
-You know what to do if you are a node.js developer
+You know what to do if you are a nodeJs developer
 
 Enter these commands.
 ```
